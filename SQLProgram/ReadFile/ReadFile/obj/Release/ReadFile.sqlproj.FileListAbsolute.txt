@@ -1,0 +1,9 @@
+C:\Data\Day5\SQL_CS\ReadFile\ReadFile\bin\Release\ReadFile.dacpac
+C:\Data\Day5\SQL_CS\ReadFile\ReadFile\bin\Release\ReadFile.dll
+C:\Data\Day5\SQL_CS\ReadFile\ReadFile\bin\Release\ReadFile.pdb
+C:\Data\Day5\SQL_CS\ReadFile\ReadFile\obj\Release\Model.xml
+C:\Data\Day5\SQL_CS\ReadFile\ReadFile\obj\Release\refactor.xml
+C:\Data\Day5\SQL_CS\ReadFile\ReadFile\obj\Release\postdeploy.sql
+C:\Data\Day5\SQL_CS\ReadFile\ReadFile\obj\Release\predeploy.sql
+C:\Data\Day5\SQL_CS\ReadFile\ReadFile\obj\Release\ReadFile.dll
+C:\Data\Day5\SQL_CS\ReadFile\ReadFile\obj\Release\ReadFile.pdb
