@@ -2,7 +2,7 @@
 
 -- Step 1 - Open a new query window to the AdventureWorks database
 
-USE AdventureWorks;
+USE AdventureWorks2019;
 GO
 
 -- Step 2 - Execute RAW mode queries
