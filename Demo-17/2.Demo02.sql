@@ -2,7 +2,7 @@
 
 -- Step 1 - Switch to the AdventureWorks database
 
-USE AdventureWorks;
+USE AdventureWorks2019;
 GO
 
 -- Step 2 - Draw a shape using geometry
@@ -49,7 +49,7 @@ DECLARE @NewYork geography;
 DECLARE @LosAngeles geography;
 SET @NewYork = geography::STGeomFromText('POINT (-74.007339 40.726966)',4326);
 SET @LosAngeles = geography::STGeomFromText('POINT (-118.24585 34.083375)',4326);
-SELECT @NewYork.STDistance(@LosAngeles);
+SELECT @NewYork.STDistance(@LosAngeles)/1000;
 GO
 
 -- Step 7 - Draw the Pentagon

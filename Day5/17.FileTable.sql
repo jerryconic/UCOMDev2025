@@ -1,0 +1,54 @@
+USE master
+DROP DATABASE IF EXISTS db01;
+
+CREATE DATABASE db01;
+GO
+
+USE [master]
+GO
+ALTER DATABASE [db01] SET FILESTREAM( NON_TRANSACTED_ACCESS = FULL, DIRECTORY_NAME = N'dbDIR' ) WITH NO_WAIT
+ALTER DATABASE [db01] ADD FILEGROUP [fs] CONTAINS FILESTREAM 
+ALTER DATABASE [db01] ADD FILE ( NAME = N'db01_fs', FILENAME = N'C:\SQLData\db01_fs' ) TO FILEGROUP [fs]
+GO
+USE db01;
+
+
+CREATE TABLE dbo.FSTable AS FILETABLE
+  WITH
+  (
+    FILETABLE_DIRECTORY = 'fsDIR',
+    FILETABLE_COLLATE_FILENAME = database_default
+  )
+GO
+
+SELECT CAST(file_stream as varchar(max)),
+* FROM dbo.FSTable;
+
+
+
+SELECT * FROM dbo.FSTable;
+
+SELECT CAST(file_stream AS varchar(max)) FROM dbo.FSTable
+WHERE stream_id = 'CEC7BEE7-AF2C-F011-AF5B-6805CA06EB5E'
+
+
+DELETE FROM dbo.FSTable
+
+DELETE FROM dbo.FSTable;
+
+
+--SQL 2008(FileStream)
+USE db01;
+
+CREATE TABLE dbo.Records
+(
+    Id uniqueidentifier ROWGUIDCOL NOT NULL UNIQUE DEFAULT NEWID(), 
+    SerialNumber INTEGER UNIQUE,
+    Chart VARBINARY(MAX) FILESTREAM 
+)
+GO
+
+INSERT INTO dbo.Records(SerialNumber, Chart)
+VALUES(1, CAST('aaa' as varbinary(max)))
+
+SELECT * FROM dbo.Records;

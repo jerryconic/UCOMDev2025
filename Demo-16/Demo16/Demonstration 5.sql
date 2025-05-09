@@ -10,6 +10,7 @@ GO
 CREATE TRIGGER TR_DATABASE_DDL_TRACKING
 ON DATABASE FOR DDL_DATABASE_LEVEL_EVENTS
 AS
+  SELECT EVENTDATA();
   DECLARE @PostTime datetime2 = EVENTDATA().value('(/EVENT_INSTANCE/PostTime)[1]','datetime2');
   DECLARE @LoginName sysname = EVENTDATA().value('(/EVENT_INSTANCE/LoginName)[1]','sysname');
   DECLARE @TSQLCommand nvarchar(max) = EVENTDATA().value('(/EVENT_INSTANCE/TSQLCommand/CommandText)[1]','nvarchar(max)');
@@ -106,8 +107,10 @@ GO
 
 -- Step 8 - Again test the trigger. Note that the create table should fail because it does not have a primary key
 
+DROP TABLE IF EXISTS dbo.ValueList
+GO
 CREATE TABLE dbo.ValueList
-( ValueListID int IDENTITY(1,1),
+( ValueListID int IDENTITY(1,1) ,
   Value decimal(18,2)
 );
 GO

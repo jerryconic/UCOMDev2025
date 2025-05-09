@@ -1,21 +1,27 @@
 USE Northwind;
 
-SELECT CustomerID AS Id, CompanyName AS [Customer_'"& Name]
-FROM dbo.Customers AS Customer
+SELECT CustomerID AS id, CompanyName AS [Customer Name]
+FROM dbo.Customers AS Customer 
 FOR XML AUTO;
+
+SELECT CustomerID, CompanyName
+FROM dbo.Customers
+FOR XML RAW;
+
 
 SELECT CustomerID, CompanyName
 FROM dbo.Customers
 FOR XML RAW('Customer');
 
-SELECT CustomerID, CompanyName
+
+SELECT TOP(5) CustomerID, CompanyName
 FROM dbo.Customers AS Customer
 FOR XML AUTO, ROOT('Customers'), ELEMENTS;
 
 SELECT CustomerID, CompanyName
 FROM dbo.Customers
 FOR XML RAW, ROOT('Customers'), ELEMENTS;
-
+------------------------------------------------
 SELECT Customer.CustomerID, Customer.CompanyName,
 	SalesOrder.OrderID, SalesOrder.OrderDate
 FROM dbo.Orders AS SalesOrder
@@ -47,6 +53,28 @@ INNER JOIN dbo.Customers AS Customer
 	ON SalesOrder.CustomerID = Customer.CustomerID
 ORDER BY CustomerID, OrderID
 FOR XML RAW, ROOT('Customers'), ELEMENTS;
+-------------------------------------------------------------
+
+SELECT ProductID
+FROM dbo.[Order Details] od
+WHERE OrderID = 10400
+FOR XML PATH('a');
+
+SELECT ProductID
+FROM dbo.[Order Details] od
+WHERE OrderID = 10400
+FOR XML PATH('');
+
+
+SELECT CONCAT(ProductID, ',')
+FROM dbo.[Order Details] od
+WHERE OrderID = 10400
+FOR XML PATH('');
+
+SELECT o.OrderID, o.OrderDate, od.ProductID
+FROM dbo.Orders o
+INNER JOIN dbo.[Order Details] od ON o.OrderID = od.OrderID
+WHERE o.OrderDate BETWEEN '1997-1-1' AND '1997-1-5';
 
 SELECT CONCAT(ProductID, ',')
 FROM dbo.[Order Details] od
@@ -144,7 +172,7 @@ PIVOT(
 ';
 EXECUTE(@sql);
 GO
-
+--------------------------------------------------------------------
 SELECT * FROM dbo.Customers AS Customer
 FOR XML AUTO, ROOT('Customers'), ELEMENTS, XMLSCHEMA;
 
